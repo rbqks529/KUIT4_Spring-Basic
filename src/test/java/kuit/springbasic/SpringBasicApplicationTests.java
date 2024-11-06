@@ -1,4 +1,4 @@
-package kuit.spring_basic;
+package kuit.springbasic;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
