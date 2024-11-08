@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 @Repository
-public class MemoryQuestionRepository {
+public class MemoryQuestionRepository implements QuestionRepository{
     private Map<String, Question> questions = new HashMap<>();
     private static int PK = 0;
 
