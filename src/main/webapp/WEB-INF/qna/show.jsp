@@ -31,10 +31,10 @@
             <div class="article-util">
                 <ul class="article-util-list">
                     <c:if test="${not empty sessionScope.user}">
-                        <c:if test="${sessionScope.user.name == question.writer}">
+                        <c:if test="${sessionScope.user.userId == question.writer}">
                             <li>
                                 <a class="link-modify-article"
-                                   href="/qna/form?questionId=${question.questionId}">수정</a>
+                                   href="/qna/updateForm?questionId=${question.questionId}">수정</a>
                             </li>
                             <li>
                                 <a class="link-modify-article"

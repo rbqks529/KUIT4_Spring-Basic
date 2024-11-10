@@ -26,9 +26,9 @@ public class QnaController {
      * TODO: showQnA
      */
     @RequestMapping("/show")
-    public String showQnA(@RequestParam("questionId") String userIdModel, Model model) {
+    public String showQnA(@RequestParam("questionId") String showQuestion, Model model) {
         log.info("showQnA");
-        Question question = questionRepository.findByQuestionId(Integer.parseInt(userIdModel));
+        Question question = questionRepository.findByQuestionId(Integer.parseInt(showQuestion));
         Collection<Answer> answers = answerRepository.findAllByQuestionId(question.getQuestionId());
 
         model.addAttribute("question", question)
