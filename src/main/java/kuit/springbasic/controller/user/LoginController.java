@@ -1,4 +1,4 @@
-package kuit.springbasic.controller;
+package kuit.springbasic.controller.user;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -10,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import static kuit.springbasic.util.UserSessionUtils.USER_SESSION_KEY;
 
 @Slf4j
 @Controller
@@ -55,7 +57,7 @@ public class LoginController {
 
         if (user != null && user.isSameUser(loggedInUser)) {
             HttpSession session = req.getSession();
-            session.setAttribute("USER_SESSION_KEY", loggedInUser);
+            session.setAttribute(USER_SESSION_KEY, loggedInUser);
             return "redirect:/";
         }
         return "redirect:/user/loginFailed";
@@ -72,7 +74,7 @@ public class LoginController {
 
         if (user != null && user.isSameUser(loggedInUser)) {
             HttpSession session = request.getSession();
-            session.setAttribute("USER_SESSION_KEY", loggedInUser);
+            session.setAttribute(USER_SESSION_KEY, loggedInUser);
             return "redirect:/";
         }
         return "redirect:/user/loginFailed";
@@ -86,7 +88,7 @@ public class LoginController {
 
         if (user != null && user.isSameUser(loggedInUser)) {
             HttpSession session = request.getSession();
-            session.setAttribute("USER_SESSION_KEY", loggedInUser);
+            session.setAttribute(USER_SESSION_KEY, loggedInUser);
             return "redirect:/";
         }
         return "redirect:/user/loginFailed";
@@ -95,5 +97,11 @@ public class LoginController {
     /**
      * TODO: logout
      */
+    @RequestMapping("/logout")
+    public String logout(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        session.removeAttribute(USER_SESSION_KEY);
+        return "redirect:/"; // 홈으로 리다이렉트
+    }
 
 }
