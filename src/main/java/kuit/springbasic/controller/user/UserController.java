@@ -4,7 +4,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import kuit.springbasic.controller.ForwardController;
 import kuit.springbasic.db.UserRepository;
-import kuit.springbasic.domain.Question;
 import kuit.springbasic.domain.User;
 import kuit.springbasic.util.UserSessionUtils;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Collection;
 
@@ -32,7 +30,7 @@ public class UserController {
     /**
      * TODO: showUserForm
      */
-    @GetMapping("/form")
+    @RequestMapping("/form")
     public String showUserForm() {
         log.info("showUserForm");
         return forwardController.getViewPath("user", "form");
@@ -59,6 +57,7 @@ public class UserController {
     public String createUserV2(@ModelAttribute User user) {
         log.info("createUserV2");
         userRepository.insert(user);
+
         return "redirect:/user/list";
     }
 
@@ -66,7 +65,7 @@ public class UserController {
      * TODO: showUserList
      */
     @RequestMapping("/list")
-    public String listUsers(Model model, HttpServletRequest request) {
+    public String showUserList(Model model, HttpServletRequest request) {
         log.info("listUsers");
 
         HttpSession session = request.getSession();
@@ -83,7 +82,7 @@ public class UserController {
     /**
      * TODO: showUserUpdateForm
      */
-    @GetMapping("/updateForm")
+    @RequestMapping("/updateForm")
     public String showUserUpdateForm(@RequestParam("userId") String userId, HttpServletRequest request) {
         log.info("showUserUpdateForm");
         User user = userRepository.findByUserId(userId);
