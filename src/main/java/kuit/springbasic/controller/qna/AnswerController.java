@@ -37,7 +37,7 @@ public class AnswerController {
                             @RequestParam("writer") String writer,
                             @RequestParam("contents") String contents,
                             HttpServletResponse response) throws SQLException, IOException {
-        log.info("AnswerController.addAnswerV0");
+        log.info("addAnswerV0");
 
         Answer answer = new Answer(questionId, writer, contents);
         Answer savedAnswer = answerRepository.insert(answer);
@@ -58,11 +58,10 @@ public class AnswerController {
                               @RequestParam("writer") String writer,
                               @RequestParam("contents") String contents,
                               Model model) throws SQLException {
-        log.info("AnswerController.addAnswerV1");
+        log.info("addAnswerV1");
 
         Answer answer = new Answer(questionId, writer, contents);
         Answer savedAnswer = answerRepository.insert(answer);
-
         Question question = questionRepository.findByQuestionId(answer.getQuestionId());
         question.increaseCountOfAnswer();
 
@@ -75,7 +74,7 @@ public class AnswerController {
     public Answer addAnswerV2(@RequestParam("questionId") int questionId,
                               @RequestParam("writer") String writer,
                               @RequestParam("contents") String contents) throws SQLException {
-        log.info("AnswerController.addAnswerV2");
+        log.info("addAnswerV2");
 
         Answer answer = new Answer(questionId, writer, contents);
         Answer savedAnswer = answerRepository.insert(answer);
@@ -89,7 +88,7 @@ public class AnswerController {
     @ResponseBody
     @PostMapping("/api/qna/addAnswer")
     public Answer addAnswerV3(@ModelAttribute Answer answer) throws SQLException {
-        log.info("AnswerController.addAnswerV3");
+        log.info("addAnswerV3");
 
         Answer savedAnswer = answerRepository.insert(answer);
 

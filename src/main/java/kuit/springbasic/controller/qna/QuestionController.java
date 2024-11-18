@@ -83,7 +83,7 @@ public class QuestionController {
         Question question = questionRepository.findByQuestionId(Integer.parseInt(updateQuestion));
         model.addAttribute("question", question);
 
-        return "qna/updateForm";
+        return forwardController.getViewPath("qna", "updateForm");
     }
 
     @RequestMapping("/updateForm")
@@ -103,7 +103,7 @@ public class QuestionController {
         Question question = questionRepository.findByQuestionId(Integer.parseInt(questionId));
         model.addAttribute("question", question);
 
-        return "qna/updateForm";
+        return forwardController.getViewPath("qna", "updateForm");
     }
 
     /**

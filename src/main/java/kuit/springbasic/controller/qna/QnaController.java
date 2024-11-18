@@ -1,5 +1,6 @@
 package kuit.springbasic.controller.qna;
 
+import kuit.springbasic.controller.ForwardController;
 import kuit.springbasic.db.AnswerRepository;
 import kuit.springbasic.db.QuestionRepository;
 import kuit.springbasic.domain.Answer;
@@ -21,6 +22,7 @@ import java.util.Collection;
 public class QnaController {
     private final QuestionRepository questionRepository;
     private final AnswerRepository answerRepository;
+    private final ForwardController forwardController;
 
     /**
      * TODO: showQnA
@@ -34,6 +36,6 @@ public class QnaController {
         model.addAttribute("question", question)
                 .addAttribute("answers", answers);
 
-        return "qna/show";
+        return forwardController.getViewPath("qna", "show");
     }
 }

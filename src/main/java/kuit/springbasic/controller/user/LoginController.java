@@ -2,6 +2,7 @@ package kuit.springbasic.controller.user;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import kuit.springbasic.controller.ForwardController;
 import kuit.springbasic.db.UserRepository;
 import kuit.springbasic.domain.User;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +21,7 @@ import static kuit.springbasic.util.UserSessionUtils.USER_SESSION_KEY;
 public class LoginController {
 
     private final UserRepository userRepository;
+    private final ForwardController forwardController;
 
     /**
      * TODO: showLoginForm
@@ -27,7 +29,7 @@ public class LoginController {
     @RequestMapping("/loginForm")
     public String showLoginForm() {
         log.info("showLoginForm");
-        return "/user/login";
+        return forwardController.getViewPath("user", "login");
     }
 
     /**
@@ -36,7 +38,7 @@ public class LoginController {
     @RequestMapping("/loginFailed")
     public String showLoginFailed() {
         log.info("showLoginFailed");
-        return "/user/loginFailed";
+        return forwardController.getViewPath("user", "loginFailed");
     }
 
 
@@ -81,7 +83,7 @@ public class LoginController {
     }
 
     @RequestMapping("/login")
-    public String loginV2(@ModelAttribute User loggedInUser,
+    public String loginV4(@ModelAttribute User loggedInUser,
                           HttpServletRequest request) {
         log.info("loginV4");
         User user = userRepository.findByUserId(loggedInUser.getUserId());
